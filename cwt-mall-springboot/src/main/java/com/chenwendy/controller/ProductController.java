@@ -1,5 +1,6 @@
 package com.chenwendy.controller;
 
+import com.chenwendy.constant.ProductCategory;
 import com.chenwendy.dto.ProductRequest;
 import com.chenwendy.model.Product;
 import com.chenwendy.service.ProductService;
@@ -19,8 +20,11 @@ public class ProductController {
 
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts() {
-        List<Product> productList = productService.getProducts();
+    public ResponseEntity<List<Product>> getProducts(
+            @RequestParam(required = false) ProductCategory category,
+            @RequestParam(required = false) String search
+    ) {
+        List<Product> productList = productService.getProducts(category, search);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }

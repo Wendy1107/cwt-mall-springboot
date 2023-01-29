@@ -1,5 +1,6 @@
 package com.chenwendy.service.ipml;
 
+import com.chenwendy.constant.ProductCategory;
 import com.chenwendy.dao.ProductDao;
 import com.chenwendy.dto.ProductRequest;
 import com.chenwendy.model.Product;
@@ -16,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts() {
-        return productDao.getProducts();
+    public List<Product> getProducts(ProductCategory category, String search) {
+        return productDao.getProducts(category, search);
     }
 
     @Override
