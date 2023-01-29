@@ -3,7 +3,11 @@ package com.chenwendy.dao;
 import com.chenwendy.dto.ProductRequest;
 import com.chenwendy.model.Product;
 
+import java.util.List;
+
 public interface ProductDao {
+
+    List<Product> getProducts();
 
     Product getProductById(Integer productId);
 
