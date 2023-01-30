@@ -1,6 +1,7 @@
 package com.chenwendy.controller;
 
 import com.chenwendy.constant.ProductCategory;
+import com.chenwendy.dto.ProductQueryParams;
 import com.chenwendy.dto.ProductRequest;
 import com.chenwendy.model.Product;
 import com.chenwendy.service.ProductService;
@@ -24,7 +25,11 @@ public class ProductController {
             @RequestParam(required = false) ProductCategory category,
             @RequestParam(required = false) String search
     ) {
-        List<Product> productList = productService.getProducts(category, search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+
+        List<Product> productList = productService.getProducts(productQueryParams);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }

@@ -1,6 +1,6 @@
 package com.chenwendy.service;
 
-import com.chenwendy.constant.ProductCategory;
+import com.chenwendy.dto.ProductQueryParams;
 import com.chenwendy.dto.ProductRequest;
 import com.chenwendy.model.Product;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getProducts(ProductCategory category, String search);
+    List<Product> getProducts(ProductQueryParams productQueryParams);
 
     Product getProductById(Integer productId);
 
