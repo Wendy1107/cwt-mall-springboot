@@ -1,5 +1,6 @@
 package com.chenwendy.controller;
 
+import com.chenwendy.dto.UserLoginRequest;
 import com.chenwendy.dto.UserRegisterRequest;
 import com.chenwendy.model.User;
 import com.chenwendy.service.UserService;
@@ -25,5 +26,12 @@ public class UserController {
         User user = userService.getUserById(userID);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    @PostMapping("/users/login")
+    public ResponseEntity<User> login(@RequestBody @Valid UserLoginRequest userLoginRequest){
+        User user = userService.login(userLoginRequest);
+
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 }
