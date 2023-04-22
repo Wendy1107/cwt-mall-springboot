@@ -5,6 +5,7 @@ import com.chenwendy.dao.ProductDao;
 import com.chenwendy.dao.UserDao;
 import com.chenwendy.dto.BuyItem;
 import com.chenwendy.dto.CreateOderRequest;
+import com.chenwendy.dto.OrderQueryParams;
 import com.chenwendy.model.Order;
 import com.chenwendy.model.OrderItem;
 import com.chenwendy.model.Product;
@@ -34,6 +35,24 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private UserDao userDao;
+
+    @Override
+    public Integer countOrder(OrderQueryParams orderQueryParams) {
+        return orderDao.countOrder(orderQueryParams);
+    }
+
+    @Override
+    public List<Order> getOrders(OrderQueryParams orderQueryParams) {
+        List<Order> orderList = orderDao.getOrders(orderQueryParams);
+
+        for (Order order : orderList) {
+            List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(order.getOrderId());
+
+            order.setOrderItemList(orderItemList);
+        }
+
+        return orderList;
+    }
 
     @Override
     public Order getOrderById(Integer orderId) {
