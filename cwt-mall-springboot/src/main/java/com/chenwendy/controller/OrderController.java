@@ -1,6 +1,7 @@
 package com.chenwendy.controller;
 
 import com.chenwendy.dto.CreateOderRequest;
+import com.chenwendy.model.Order;
 import com.chenwendy.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,8 +23,12 @@ public class OrderController {
     public ResponseEntity<?> createOrder(@PathVariable Integer userId,
                                          @RequestBody @Valid CreateOderRequest createOderRequest) {
 
+        // 創建訂單
         Integer orderId = orderService.createOrder(userId, createOderRequest);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
+        // 取得訂單詳細資訊
+        Order order = orderService.getOrderById(orderId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }
 }

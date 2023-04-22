@@ -4,6 +4,7 @@ import com.chenwendy.dao.OrderDao;
 import com.chenwendy.dao.ProductDao;
 import com.chenwendy.dto.BuyItem;
 import com.chenwendy.dto.CreateOderRequest;
+import com.chenwendy.model.Order;
 import com.chenwendy.model.OrderItem;
 import com.chenwendy.model.Product;
 import com.chenwendy.service.OrderService;
@@ -22,6 +23,20 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ProductDao productDao;
+
+    @Override
+    public Order getOrderById(Integer orderId) {
+        // 訂單
+        Order order = orderDao.getOrderById(orderId);
+
+        // 商品明細
+        List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(orderId);
+
+        order.setOrderItemList(orderItemList);
+
+        // 總資訊
+        return order;
+    }
 
     @Transactional
     @Override
